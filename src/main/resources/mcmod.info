@@ -1,0 +1,16 @@
+[
+{
+  "modid": "fkcounter",
+  "name": "FKCounter",
+  "description": "A final kill counter mod for Mega Walls",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["P0ke"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
