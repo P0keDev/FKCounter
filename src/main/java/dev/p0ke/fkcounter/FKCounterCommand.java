@@ -1,4 +1,4 @@
-package p0ke.fkcounter;
+package dev.p0ke.fkcounter;
 
 import java.util.stream.Collectors;
 

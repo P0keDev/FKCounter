@@ -1,4 +1,4 @@
-package p0ke.fkcounter;
+package dev.p0ke.fkcounter;
 
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
