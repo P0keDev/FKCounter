@@ -1,4 +1,4 @@
-package dev.p0ke.fkcounter;
+package dev.p0ke.fkcounter.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

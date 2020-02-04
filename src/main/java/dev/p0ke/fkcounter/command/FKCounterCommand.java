@@ -1,7 +1,12 @@
-package dev.p0ke.fkcounter;
+package dev.p0ke.fkcounter.command;
 
 import java.util.stream.Collectors;
 
+import dev.p0ke.fkcounter.FKCounterMod;
+import dev.p0ke.fkcounter.gui.FKCounterSettingsGui;
+import dev.p0ke.fkcounter.util.DelayedTask;
+import dev.p0ke.fkcounter.util.KillCounter;
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -28,10 +33,15 @@ public class FKCounterCommand extends CommandBase {
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		KillCounter killCounter = FKCounterMod.instance().getKillCounter();
-		if(killCounter == null) { return; }
 		
-		if(args.length > 0 && args[0].equalsIgnoreCase("players")) {
+		
+		if(args.length > 0 && args[0].equalsIgnoreCase("settings")) {
+			new DelayedTask(() -> Minecraft.getMinecraft().displayGuiScreen(new FKCounterSettingsGui()), 1);
 			
+		} else if(args.length > 0 && args[0].equalsIgnoreCase("forcetoggle")) {
+			FKCounterMod.instance().forceToggle();
+		} else if(args.length > 0 && args[0].equalsIgnoreCase("players")) {
+			if(killCounter == null) return;
 			String msg = "";
 			msg += EnumChatFormatting.RED + "RED" + EnumChatFormatting.WHITE + ": " + 
 					(killCounter.getPlayers(KillCounter.RED_TEAM).entrySet().stream().map(entry -> entry.getKey() + " (" + entry.getValue() + ")").collect(Collectors.joining(", "))) + "\n";
@@ -45,7 +55,7 @@ public class FKCounterCommand extends CommandBase {
 			sender.addChatMessage(new ChatComponentText(msg));
 			
 		} else {
-		
+			if(killCounter == null) return;
 			String msg = "";
 			msg += EnumChatFormatting.RED + "RED" + EnumChatFormatting.WHITE + ": " + killCounter.getKills(KillCounter.RED_TEAM) + "\n";
 			msg += EnumChatFormatting.GREEN + "GREEN" + EnumChatFormatting.WHITE + ": " + killCounter.getKills(KillCounter.GREEN_TEAM) + "\n";
